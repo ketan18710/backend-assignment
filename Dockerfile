@@ -1,5 +1,5 @@
 # Use the official Node.js 16 image
-FROM node:16 as build
+FROM --platform=linux/amd64 node:16-alpine AS build 
 
 # Set the working directory inside the container
 WORKDIR /app
@@ -20,7 +20,7 @@ RUN npm install -g typescript
 RUN npm run build
 
 # Use a smaller Node.js image for the production build
-FROM node:16-alpine
+FROM --platform=linux/amd64 node:16-alpine  
 
 # Set the working directory inside the container
 WORKDIR /app

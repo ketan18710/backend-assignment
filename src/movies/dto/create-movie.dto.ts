@@ -3,6 +3,7 @@ import {
   IsString,
   IsArray,
   IsDate,
+  IsDateString,
   ArrayMinSize,
 } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
@@ -23,10 +24,10 @@ export class CreateMovieDto {
   @ArrayMinSize(1)
   genres: string[];
 
-  @ApiProperty({ type: Date })
+  @ApiProperty({ format: 'date-time' }) // Important for Swagger
   @IsNotEmpty()
-  @IsDate()
-  releaseDate: Date;
+  @IsDateString() // Validates and converts from string
+  releaseDate: string; // Keep as string in DTO for input
 
   @ApiProperty()
   @IsNotEmpty()
